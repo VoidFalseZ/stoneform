@@ -1,0 +1,10 @@
+{/* Bottom Navigation - Consistent with komisi.js */}
+<div className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-xl border-t border-purple-400/20 z-50">
+  <div className="max-w-4xl mx-auto grid grid-cols-5 gap-1 p-2">
+    <BottomNavbar />
+  </div>
+</div>
+
+
+
+import BottomNavbar from '../components/BottomNavbar';
