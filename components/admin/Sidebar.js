@@ -1,12 +1,29 @@
 // components/admin/Sidebar.js
 import { useRouter } from 'next/router';
 import { Icon } from '@iconify/react';
+import { useState, useEffect } from 'react';
 
-export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
+export default function Sidebar() {
   const router = useRouter();
+  // Get initial state from localStorage or default to false (minimized)
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Load sidebar state from localStorage on component mount
+  useEffect(() => {
+    const savedState = localStorage.getItem('sidebarState');
+    if (savedState !== null) {
+      setSidebarOpen(JSON.parse(savedState));
+    }
+  }, []);
+
+  // Save sidebar state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('sidebarState', JSON.stringify(sidebarOpen));
+  }, [sidebarOpen]);
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
+    localStorage.removeItem('sidebarState'); // Also clear sidebar state on logout
     router.push('/admin/login');
   };
 
